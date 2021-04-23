@@ -1,0 +1,64 @@
+在　　　　　/home/pingcoool/performance_test/mininet-quic/topology　　　　目录下
+运行:sudo ./test_01.py 
+备注：test.py是学长之前写的那个代码　　　后来经过修改　之后　　该使用test_01.py   test_02.py是用来测试以太网的
+xterm r1
+xterm r2
+
+服务器端  r2
+//仿真条件下  需要给每个网卡分配ip地址
+ifconfig r2-eth0 10.0.1.2/24
+ifconfig r2-eth1 11.0.0.2/24
+ifconfig r2-eth2 12.0.0.2/24
+运行程序前  先配置网卡
+
+
+
+客户段配置网卡程序 r1
+
+
+运行以下指令
+ifconfig r1-eth0 10.0.0.2/24
+ifconfig r1-eth1 11.0.0.1/24
+ifconfig r1-eth2  12.0.0.1/24
+
+
+//
+cd   /home/pingcoool/mvfst/_build/build/quic/samples
+
+r2:sudo ./echo_sever
+r1:sudo ./echo_client 
+
+
+xterm  h1 h2
+h1:ping 10.0.1.2 
+
+//运行以太网版本
+将　mvfst/quic/samples文件夹下的　client.c和server.cc的文件里的网卡名字进行更改．替换备注的部分即可．
+
+
+
+//当前文件下是单径以太网模式　　修改配置文件is_multipath=1 就可以变成多径模式
+客户段配置网卡程序 r1运行以下指令
+ifconfig r1-eth0 10.0.0.2/24
+ifconfig r1-eth1 11.0.0.1/24
+ifconfig r1-eth2  12.0.0.1/24
+
+//仿真条件下  需要给每个网卡分配ip地址
+ifconfig r2-eth0 10.0.0.5/24
+ifconfig r2-eth1 11.0.0.2/24
+ifconfig r2-eth2 12.0.0.2/24
+//桌面上有个 "改成以太网帧"的文件夹
+
+
+
+
+
+
+
+
+
+
+
+
+
+
